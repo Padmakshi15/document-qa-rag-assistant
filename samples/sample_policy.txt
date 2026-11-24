@@ -1,0 +1,37 @@
+Document Retention Policy
+=========================
+
+Purpose
+-------
+This policy states how long uploaded documents are kept, who can access
+them, and how they are deleted. It applies to every document indexed by
+the Document Q&A Assistant.
+
+Retention period
+----------------
+Uploaded documents and their indexed chunks are retained for 90 days
+from the date of upload. After 90 days the document and its chunks are
+automatically deleted from the vector store. A document owner may request
+earlier deletion at any time, and deletion is completed within 5 business
+days of the request.
+
+Access
+------
+Only the person who uploaded a document can ask questions about it.
+Uploaded documents are never shared with other users, and they are never
+used to train any model. Access logs record the date of each upload and
+each deletion, and nothing else.
+
+Deletion
+--------
+When a document is deleted, its text, its chunks, and its embeddings are
+all removed from the ChromaDB vector store. Deletion is permanent and
+cannot be undone, so keep a copy of any document you may need later.
+Backups, if any exist, are deleted within 30 days of the original
+deletion.
+
+Review
+------
+This policy is reviewed every 12 months. The next review is due 12
+months after the last review date recorded in the policy register.
+Questions about this policy should be sent to the document owner.

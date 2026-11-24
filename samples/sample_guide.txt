@@ -1,0 +1,51 @@
+Getting Started Guide for the Document Q&A Assistant
+====================================================
+
+What this assistant does
+-------------------------
+The Document Q&A Assistant answers questions using only the documents you
+upload. Upload a PDF or a text file, ask a question in plain language, and
+you get an answer together with the source page it came from. If the
+documents do not contain the answer, the assistant says so instead of
+guessing.
+
+How to upload a document
+-------------------------
+Open the app, use the file uploader, and choose one or more PDF or TXT
+files. Click "Index uploaded documents". Indexing reads the text, splits
+it into chunks, turns each chunk into an embedding, and stores the
+embeddings in a ChromaDB vector store. The default chunk size is 1000
+characters with an overlap of 200 characters. The overlap means the last
+200 characters of one chunk repeat at the start of the next chunk, so an
+answer that straddles a boundary is not cut in half.
+
+How to ask a question
+---------------------
+Type your question in the question box and click "Ask". The assistant
+retrieves the 4 most relevant chunks (top-k is 4 by default) and answers
+only from that retrieved context. Every answer lists its sources, for
+example "sample_guide.txt, p. 1", so you can open the document and check
+the answer yourself.
+
+What the settings mean
+----------------------
+Chunk size controls how much text goes into each piece: 1000 characters
+is about a short paragraph. Overlap controls how much neighbouring chunks
+share: 200 characters keeps sentences intact across boundaries. Top-k
+controls how many chunks are retrieved for each question: 4 chunks give
+enough context without adding unrelated text.
+
+Grounded answers and the fallback
+----------------------------------
+A grounded answer is one that comes from the retrieved text. The assistant
+is instructed to answer only from that context. When no supporting text is
+found, it returns a clear fallback message: it could not find supporting
+information in the uploaded documents. That behaviour is deliberate. A
+clear "I don't know" is better than a confident invented answer.
+
+Privacy note
+------------
+Documents are indexed locally in the ChromaDB store in the project folder.
+With the offline embedding mode nothing leaves your machine. When an
+OpenAI API key is configured, document text and questions are sent to the
+OpenAI API for embeddings and answers.
